@@ -14,7 +14,11 @@ import Directory from "../../components/directory/directory.component";
  * Main component
  */
 const HomePage = () => (
+  /**
+   * set home container
+   */
   <div className="homepage">
+    {/**set directory container */}
     <Directory />
   </div>
 );
