@@ -10,13 +10,18 @@ import "./App.css";
 /**
  * import Pages
  */
-
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
+/**
+ * import components
+ */
+import Header from "./components/header/header.component";
 
 function App() {
   return (
     <div>
+      {/**Header section */}
+      <Header />
       {/**set router section, we use switch to handle first found */}
       <Switch>
         <Route exact path="/" component={HomePage} />
