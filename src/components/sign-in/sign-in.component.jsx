@@ -2,7 +2,7 @@
  * import core
  */
 import React, { Component } from "react";
-import { signInWithGoogle } from "../../firebase/firebase.util";
+import { auth, signInWithGoogle } from "../../firebase/firebase.util";
 /**
  * import css
  */
@@ -21,12 +21,22 @@ class SignIn extends Component {
       password: "",
     };
   }
-
-  handleSubmit = (event) => {
+  /**
+   * handle submit and wait for user auth
+   */
+  handleSubmit = async (event) => {
     event.preventDefault();
-    this.setState({ email: "", password: "" });
+    const { email, password } = this.state;
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState({ email: "", password: "" });
+    } catch (error) {
+      console.log(error);
+    }
   };
-
+  /**
+   * handle change on state
+   */
   handleChange = (event) => {
     const { value, name } = event.target;
     this.setState({ [name]: value });
