@@ -3,7 +3,7 @@
  */
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { auth } from "./firebase/firebase.util";
+import { auth, createUserProfileDocument } from "./firebase/firebase.util";
 /**
  * import css
  */
@@ -26,15 +26,43 @@ class App extends React.Component {
       currentUser: null,
     };
   }
-
+  /**
+   * create subscriber
+   */
   unsubscribeFromAuth = null;
-
+  /**
+   * component did mount
+   */
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      this.setState({ currentUser: user });
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      /**
+       * check if user exist
+       */
+      if (userAuth) {
+        /**
+         * retrive or create user
+         */
+        const userRef = await createUserProfileDocument(userAuth);
+        /**
+         * set user on state
+         */
+        userRef.onSnapshot((snapShot) => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data(),
+            },
+          });
+          console.log(this.state);
+        });
+      } else {
+        this.setState({ currentUser: userAuth });
+      }
     });
   }
-
+  /**
+   * component will unmount
+   */
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
