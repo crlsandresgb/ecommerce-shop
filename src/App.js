@@ -4,6 +4,11 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { auth, createUserProfileDocument } from "./firebase/firebase.util";
+import { connect } from "react-redux";
+/**
+ * import redux actions
+ */
+import { setCurrentUser } from "./redux/user/user.action";
 /**
  * import css
  */
@@ -20,12 +25,6 @@ import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up
 import Header from "./components/header/header.component";
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      currentUser: null,
-    };
-  }
   /**
    * create subscriber
    */
@@ -34,6 +33,7 @@ class App extends React.Component {
    * component did mount
    */
   componentDidMount() {
+    const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       /**
        * check if user exist
@@ -47,15 +47,13 @@ class App extends React.Component {
          * set user on state
          */
         userRef.onSnapshot((snapShot) => {
-          this.setState({
-            currentUser: {
-              id: snapShot.id,
-              ...snapShot.data(),
-            },
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data(),
           });
         });
       } else {
-        this.setState({ currentUser: userAuth });
+        setCurrentUser(userAuth);
       }
     });
   }
@@ -70,7 +68,7 @@ class App extends React.Component {
     return (
       <div>
         {/**Header section */}
-        <Header currentUser={this.state.currentUser} />
+        <Header />
         {/**set router section, we use switch to handle first found */}
         <Switch>
           <Route exact path="/" component={HomePage} />
@@ -82,4 +80,10 @@ class App extends React.Component {
   }
 }
 
-export default App;
+/**
+ * dispatch user
+ */
+const masDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+export default connect(null, masDispatchToProps)(App);
