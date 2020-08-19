@@ -6,7 +6,7 @@ import SHOP_DATA from "./shop.data.js";
 /**
  * import component
  */
-import CollectionPreview from "../../components/preview-sollection/preview-collection.component";
+import CollectionPreview from "../../components/preview-collection/preview-collection.component";
 /**
  * main class
  */
@@ -22,7 +22,7 @@ class ShopPage extends Component {
     return (
       <div className="shop-page">
         {collections.map(({ id, ...otherCollectionsProps }) => (
-          <CollectionPreview key="id" {...otherCollectionsProps} />
+          <CollectionPreview key={id} {...otherCollectionsProps} />
         ))}
       </div>
     );
