@@ -70,9 +70,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {/**Header section */}
         <Header />
-        {/**set router section, we use switch to handle first found */}
+
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />

@@ -18,7 +18,6 @@ const HomePage = () => (
    * set home container
    */
   <div className="homepage">
-    {/**set directory container */}
     <Directory />
   </div>
 );

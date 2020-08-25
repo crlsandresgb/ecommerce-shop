@@ -24,7 +24,6 @@ const Directory = ({ sections }) => (
    * set directory component
    */
   <div className="directory-menu">
-    {/**set data and select all the menu items using map */}
     {sections.map(({ id, ...otherProps }) => (
       <MenuItem key={id} {...otherProps} />
     ))}
