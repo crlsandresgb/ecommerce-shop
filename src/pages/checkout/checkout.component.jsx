@@ -57,9 +57,6 @@ const ChecoutPage = ({ cartItems, total }) => (
   </div>
 );
 
-/**
- * map to props
- */
 const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
   total: selectCartTotal,

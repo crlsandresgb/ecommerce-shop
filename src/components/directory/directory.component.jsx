@@ -20,9 +20,6 @@ import "./directory.styles.scss";
  * main class
  */
 const Directory = ({ sections }) => (
-  /**
-   * set directory component
-   */
   <div className="directory-menu">
     {sections.map(({ id, ...otherProps }) => (
       <MenuItem key={id} {...otherProps} />

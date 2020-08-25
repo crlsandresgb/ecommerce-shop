@@ -11,9 +11,6 @@ import "./menu-item.styles.scss";
  * main component
  */
 const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => (
-  /**
-   * main container
-   */
   <div
     className={`${size} menu-item`}
     onClick={() => history.push(`${match.url}${linkUrl}`)}

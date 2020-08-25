@@ -1,54 +1,34 @@
-/**
- * import core
- */
+/*** import core */
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { auth, createUserProfileDocument } from "./firebase/firebase.util";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-/**
- * import redux actions
- */
+/*** import redux actions */
 import { setCurrentUser } from "./redux/user/user.action";
 import { selectCurrentUser } from "./redux/user/user.selectors";
-/**
- * import css
- */
+/*** import css */
 import "./App.css";
-/**
- * import Pages
- */
+/*** import Pages */
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import ChecoutPage from "./pages/checkout/checkout.component";
-/**
- * import components
- */
+/*** import components */
 import Header from "./components/header/header.component";
 
 class App extends React.Component {
-  /**
-   * create subscriber
-   */
+  /*** create subscriber*/
   unsubscribeFromAuth = null;
-  /**
-   * component did mount
-   */
+  /*** component did mount*/
   componentDidMount() {
     const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      /**
-       * check if user exist
-       */
+      /*** check if user exist*/
       if (userAuth) {
-        /**
-         * retrive or create user
-         */
+        /*** retrive or create user */
         const userRef = await createUserProfileDocument(userAuth);
-        /**
-         * set user on state
-         */
+        /*** set user on state */
         userRef.onSnapshot((snapShot) => {
           setCurrentUser({
             id: snapShot.id,
@@ -60,9 +40,7 @@ class App extends React.Component {
       }
     });
   }
-  /**
-   * component will unmount
-   */
+  /*** component will unmount */
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
