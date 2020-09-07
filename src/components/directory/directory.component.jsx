@@ -15,16 +15,16 @@ import MenuItem from "../menu-item/menu-item.component";
 /**
  * import CSS
  */
-import "./directory.styles.scss";
+import { DirectoryMenuContainer } from "./directory.styles";
 /**
  * main class
  */
 const Directory = ({ sections }) => (
-  <div className="directory-menu">
-    {sections.map(({ id, ...otherProps }) => (
-      <MenuItem key={id} {...otherProps} />
+  <DirectoryMenuContainer>
+    {sections.map(({ id, ...otherSectionProps }) => (
+      <MenuItem key={id} {...otherSectionProps} />
     ))}
-  </div>
+  </DirectoryMenuContainer>
 );
 /**
  * map state

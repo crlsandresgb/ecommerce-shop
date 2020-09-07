@@ -1,10 +1,4 @@
-/**
- * import core
- */
 import React from "react";
-/**
- * improt css
- */
 
 import { CustomButtonContainer } from "./custom-button.styles";
 
