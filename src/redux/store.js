@@ -4,6 +4,7 @@
 import { createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import { persistStore } from "redux-persist";
+import thunk from "redux-thunk";
 /**
  * import root reducer
  */
@@ -12,7 +13,7 @@ import rootReducer from "./root-reducer";
 /**
  * set middleware
  */
-const middlewares = [];
+const middlewares = [thunk];
 if (process.env.NODE_ENV === "development") {
   middlewares.push(logger);
 }

@@ -5,7 +5,8 @@ import React from "react";
 import { connect } from "react-redux";
 /**
  * redux
- */ import { selectCollection } from "../../redux/shop/shop.selectors";
+ */
+import { selectCollection } from "../../redux/shop/shop.selectors";
 /**
  * css
  */
