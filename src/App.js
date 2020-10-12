@@ -1,13 +1,11 @@
 /*** import core */
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { auth, createUserProfileDocument } from "./firebase/firebase.util";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 /*** import redux actions */
-import { setCurrentUser } from "./redux/user/user.action";
 import { selectCurrentUser } from "./redux/user/user.selectors";
-
+import { checkUserSession } from "./redux/user/user.action";
 /*** import css */
 import "./App.css";
 /*** import Pages */
@@ -23,23 +21,8 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
   /*** component did mount*/
   componentDidMount() {
-    const { setCurrentUser } = this.props;
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      /*** check if user exist*/
-      if (userAuth) {
-        /*** retrive or create user */
-        const userRef = await createUserProfileDocument(userAuth);
-        /*** set user on state */
-        userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data(),
-          });
-        });
-      } else {
-        setCurrentUser(userAuth);
-      }
-    });
+    const { checkUserSession } = this.props;
+    checkUserSession();
   }
   /*** component will unmount */
   componentWillUnmount() {
@@ -77,10 +60,7 @@ class App extends React.Component {
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
-/**
- * dispatch user
- */
-const masDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+const mapDispatchToProps = (dispatch) => ({
+  checkUserSession: () => dispatch(checkUserSession()),
 });
-export default connect(mapStateToProps, masDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -23,7 +23,7 @@ export const fetchCollectionsFailure = (errorMessage) => ({
   type: ShopActionTypes.FETCH_CILLECTIONS_FAILURE,
   payload: errorMessage,
 });
-/**first action */
+/**first action NOT IN USE*/
 export const fetchCollectionsStartAsync = () => {
   return (dispatch) => {
     const collectionRef = firestore.collection("collections");
