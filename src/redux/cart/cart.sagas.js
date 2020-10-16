@@ -1,7 +1,6 @@
 /** impoirt core */
 import { all, call, takeLatest, put } from "redux-saga/effects";
 import userActiontypes from "../user/user.types";
-import userActionTypes from "../user/user.types";
 import { clearCart } from "./cart.actions";
 
 export function* clearCartOnSignOut() {

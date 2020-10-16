@@ -2,7 +2,6 @@
  * import core
  */
 import React from "react";
-import { auth } from "../../firebase/firebase.util";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 /**
