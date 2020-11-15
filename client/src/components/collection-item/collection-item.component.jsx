@@ -13,7 +13,7 @@ import {
   BackgroundImage,
   NameContainer,
   PriceContainer,
-} from "./collection-styles.styles";
+} from "./collection-item.styles";
 /**
  * redux section
  */
