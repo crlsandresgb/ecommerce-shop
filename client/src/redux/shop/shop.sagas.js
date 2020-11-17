@@ -14,7 +14,6 @@ import {
 
 /**Sagas */
 export function* fetchCollectionsAsync() {
-  yield console.log("i am fired");
   try {
     const collectionRef = firestore.collection("collections");
     const snapshot = yield collectionRef.get();
