@@ -8,6 +8,8 @@ const CartActionTypes = {
   CLEAR_ITEM_FROM_CART: "CLEAR_ITEM_FROM_CART",
   REMOVE_ITEM: "REMOVE_ITEM",
   CLEAR_CART: "CLEAR_CART",
+  SET_CART_FROM_DB: "SET_CART_FROM_DB",
+  UPDATE_CART_ON_DB: "UPDATE_CART_ON_DB",
 };
 
 export default CartActionTypes;

@@ -98,6 +98,23 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     return accumulator;
   }, {});
 };
+
+/**
+ * get cart reference for adding or update items
+ */
+export const getCartByUser = async (userId) => {
+  const cartRef = firestore.collection("carts").where("userId", "==", userId);
+  const cartSnapshot = await cartRef.get();
+
+  if (cartSnapshot.empty) {
+    const cartDocRef = firestore.collection("carts").doc();
+    await cartDocRef.set({ userId, cartItems: [] });
+    return cartDocRef;
+  } else {
+    return cartSnapshot.docs[0].ref;
+  }
+};
+
 /**
  * export auth and firestore
  */

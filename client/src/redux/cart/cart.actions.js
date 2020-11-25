@@ -27,3 +27,12 @@ export const removeItem = (item) => ({
 export const clearCart = () => ({
   type: CartActionTypes.CLEAR_CART,
 });
+
+export const updateCartOnDB = () => ({
+  type: CartActionTypes.UPDATE_CART_ON_DB,
+});
+
+export const setCartFromDB = (CartItems) => ({
+  type: CartActionTypes.SET_CART_FROM_DB,
+  payload: CartItems,
+});
